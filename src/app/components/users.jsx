@@ -7,12 +7,30 @@ const Users = () => {
     const renderUserList = () => {
         return users.map(user => (
             <tr>
-                <th scope="row" id={user._id}>{user.name}</th>
-                <td id={user.qualities._id}> {user.qualities.map((quality) => <span className={'badge m-1 bg-' + quality.color}>{quality.name}</span>)} </td>
-                <td id={user.profession._id}>{user.profession.name}</td>
-                <td>{user.completedMeetings}</td>
-                <td>{user.rate}</td>
-                <td id={user._id}><button className ="badge bg-danger p-2 border-0" onClick={() => handleDelete(user)}>Delete</button></td>
+                <th scope="row" id={user._id}>
+                    {user.name}
+                </th>
+                <td id={user.qualities._id}>
+                    {user.qualities.map((quality) =>
+                        <span className={'badge m-1 bg-' + quality.color}>
+                            {quality.name}
+                        </span>)
+                    }
+                </td>
+                <td id={user.profession._id}>
+                    {user.profession.name}
+                </td>
+                <td>
+                    {user.completedMeetings}
+                </td>
+                <td>
+                    {user.rate}
+                </td>
+                <td id={user._id}>
+                    <button className ="badge bg-danger p-2 border-0" onClick={() => handleDelete(user)}>
+                        Delete
+                    </button>
+                </td>
             </tr>
         ))
     }
@@ -35,7 +53,12 @@ const Users = () => {
             return text_forms[2];
         }
 
-        const phrase = number !== 0 ? `${number} ${declOfNum(number, ["человек", "человека", "человек"])} ${declOfNum(number, ["тусанёт", "тусанёт", "тусанут"])} с тобой сегодня` : 'Никто с тобой не тусанет'
+        const variantsWord1 = ["человек", "человека", "человек"]
+        const variantsWord2 = ["тусанёт", "тусанёт", "тусанут"]
+
+        const phrase = number !== 0
+            ? `${number} ${declOfNum(number, variantsWord1)} ${declOfNum(number, variantsWord2)} с тобой сегодня`
+            : 'Никто с тобой не тусанет'
 
         const colorPhrase = number !== 0 ? 'badge bg-primary' : 'badge bg-danger'
 

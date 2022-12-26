@@ -4,13 +4,19 @@ import SearchStatus from './components/searchStatus'
 import Api from "./api";
 
 const App = () => {
-    const usersArr = Api.users.fetchAll()
-    console.log(usersArr.length)
-    console.log(Users.length)
+    const [users, setUsers] = useState(Api.users.fetchAll())
+
+    const handleDelete = (userId) => {
+        setUsers(prevState => prevState.filter((user) => user !== userId))
+    }
     return (
         <div>
-            <SearchStatus/>
-            <Users/>
+            <SearchStatus
+                length = {users.length}
+            />
+            <Users
+                onClick = {handleDelete}
+            />
         </div>
     )
 }

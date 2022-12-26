@@ -1,7 +1,8 @@
 import React from 'react'
 import User from './user'
 
-const Users = () => {
+const Users = (props) => {
+    const {handleDelete} = props
     return (
         <>
         <table className="table">
@@ -16,7 +17,9 @@ const Users = () => {
                 </tr>
             </thead>
             <tbody>
-                <User/>
+                <User
+                    onClick={handleDelete}
+                />
             </tbody>
         </table>
         </>

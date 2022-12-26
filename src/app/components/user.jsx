@@ -3,12 +3,8 @@ import Qualities from './qualities'
 import BookMark from './bookmark'
 import Api from "../api";
 
-const User = () => {
-    const [users, setUsers] = useState(Api.users.fetchAll())
-
-    const handleDelete = (userId) => {
-        setUsers(prevState => prevState.filter((user) => user !== userId))
-    }
+const User = (props) => {
+    const users = Api.users.fetchAll()
 
     return users.map(user => (
             <tr key={user._id}>
@@ -33,7 +29,7 @@ const User = () => {
                     {user.rate}
                 </td>
                 <td id={user._id}>
-                    <button className ="badge bg-danger p-2 border-0" onClick={() => handleDelete(user)}>
+                    <button className ="badge bg-danger p-2 border-0" onClick={() => props.handleDelete(user)}>
                         Delete
                     </button>
                 </td>

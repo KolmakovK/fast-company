@@ -16,6 +16,7 @@ const App = () => {
             />
             <Users
                 onClick = {handleDelete}
+                usersArr = {users}
             />
         </div>
     )

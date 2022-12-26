@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Qualities from './qualities'
 import BookMark from './bookmark'
-import Api from "../api";
 
 const User = (props) => {
-    const users = Api.users.fetchAll()
-
+    const users = props.usersArr
+    // console.log(props)
     return users.map(user => (
             <tr key={user._id}>
                 <th scope="row" id={user._id}>
@@ -29,7 +28,7 @@ const User = (props) => {
                     {user.rate}
                 </td>
                 <td id={user._id}>
-                    <button className ="badge bg-danger p-2 border-0" onClick={() => props.handleDelete(user)}>
+                    <button className ="badge bg-danger p-2 border-0" onClick={() => props.onClick(user)}>
                         Delete
                     </button>
                 </td>

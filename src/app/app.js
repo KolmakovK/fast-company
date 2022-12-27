@@ -10,10 +10,13 @@ const App = () => {
   };
 
   const handleToggleBookMark = (id) => {
-    console.log(id);
-    // const switchBookMark = users.map((user) => user.id === id);
-    // setUsers(switchBookMark);
+    setUsers((prevState) =>
+      prevState.map((user) =>
+        user._id === id ? { ...user, bookmark: !user.bookmark } : user
+      )
+    );
   };
+
   return (
     <div>
       <SearchStatus length={users.length} />

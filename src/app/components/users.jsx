@@ -21,7 +21,7 @@ const Users = ({ usersArr, onDelete, onClick }) => {
             key={user._id}
             onDelete={onDelete}
             user={user}
-            status={onClick}
+            onStatusChange={onClick}
           />
         ))}
       </tbody>

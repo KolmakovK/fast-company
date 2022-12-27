@@ -2,7 +2,7 @@ import React from "react";
 import Qualities from "./qualities";
 import BookMark from "./bookmark";
 
-const user = ({ user, onDelete, status }) => {
+const user = ({ user, onDelete, onStatusChange }) => {
   return (
     <tr key={user._id}>
       <th scope="row" id={user._id}>
@@ -17,7 +17,11 @@ const user = ({ user, onDelete, status }) => {
       <td>{user.completedMeetings}</td>
       <td>{user.rate}</td>
       <td>
-        <BookMark key={user._id} status={() => status(user)} />
+        <BookMark
+          key={user._id}
+          onClick={() => onStatusChange(user._id)}
+          status={user.bookmark}
+        />
       </td>
       <td id={user._id}>
         <button

@@ -1,9 +1,9 @@
 import React from "react";
 
-const BookMark = ({ status, ...rest }) => {
+const BookMark = ({ status, onClick }) => {
   const style = status ? "bi bi-bookmark-heart-fill" : "bi bi-bookmark-heart";
   return (
-    <button onClick={status}>
+    <button onClick={onClick}>
       <i className={style}></i>
     </button>
   );

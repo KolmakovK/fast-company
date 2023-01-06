@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SearchStatus = ({ length }) => {
   function declOfNum(number, textForms) {
@@ -34,6 +35,10 @@ const SearchStatus = ({ length }) => {
       <span className={colorPhrase}>{phrase}</span>
     </h2>
   );
+};
+
+SearchStatus.propTypes = {
+  length: PropTypes.number
 };
 
 export default SearchStatus;

@@ -9,13 +9,14 @@ import SearchStatus from "./searchStatus";
 
 const Users = ({ usersArr, onDelete, onClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [professions, setProfessions] = useState(Api.professions.fetchAll());
+  const [professions, setProfessions] = useState([]);
   const [selectedProf, setSelectedProf] = useState();
   const pageSize = 2;
 
   useEffect(() => {
     Api.professions.fetchAll().then((data) => setProfessions(data));
   }, []);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedProf]);
@@ -28,8 +29,10 @@ const Users = ({ usersArr, onDelete, onClick }) => {
   };
 
   const filteredUsers = selectedProf
-    ? usersArr.filter((user) => user.profession === selectedProf)
+    ? usersArr.filter((user) => user.profession._id === selectedProf._id)
     : usersArr;
+
+  console.log({ selectedProf, filteredUsers });
   const count = filteredUsers.length;
   const userCrop = paginate(filteredUsers, currentPage, pageSize);
   const clearFilter = () => {
@@ -91,7 +94,7 @@ const Users = ({ usersArr, onDelete, onClick }) => {
 };
 
 Users.propTypes = {
-  usersArr: PropTypes.arrayOf(PropTypes.object),
+  usersArr: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   onDelete: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired
 };

@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Users from "./components/users";
 import Api from "./api";
 
 const App = () => {
-  const [users, setUsers] = useState(Api.users.fetchAll());
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    Api.users
+      .fetchAll()
+      .then((data) => setUsers(data))
+      .finally(() => setLoading(false));
+  }, []);
+
   const handleDelete = (userId) => {
     setUsers((prevState) => prevState.filter((user) => user !== userId));
   };
@@ -18,11 +28,14 @@ const App = () => {
 
   return (
     <div>
-      <Users
-        onDelete={handleDelete}
-        usersArr={users}
-        onClick={handleToggleBookMark}
-      />
+      {loading && <div>Loading...</div>}
+      {!loading && (
+        <Users
+          onDelete={handleDelete}
+          usersArr={users}
+          onClick={handleToggleBookMark}
+        />
+      )}
     </div>
   );
 };

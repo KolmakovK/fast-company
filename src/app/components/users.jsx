@@ -32,7 +32,6 @@ const Users = ({ usersArr, onDelete, onClick }) => {
     ? usersArr.filter((user) => user.profession._id === selectedProf._id)
     : usersArr;
 
-  console.log({ selectedProf, filteredUsers });
   const count = filteredUsers.length;
   const userCrop = paginate(filteredUsers, currentPage, pageSize);
   const clearFilter = () => {

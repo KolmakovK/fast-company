@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import User from "./user";
 import { paginate } from "../utils/paginate";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
 import Api from "../api";
 import PropTypes from "prop-types";
 import SearchStatus from "./searchStatus";
+import UsersTable from "./usersTable";
+import _ from "lodash";
 
-const Users = ({ usersArr, onDelete, onClick }) => {
+const Users = ({ usersArr, ...rest }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfessions] = useState([]);
   const [selectedProf, setSelectedProf] = useState();
-  const pageSize = 2;
+  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+  const pageSize = 12;
 
   useEffect(() => {
     Api.professions.fetchAll().then((data) => setProfessions(data));
@@ -21,19 +23,30 @@ const Users = ({ usersArr, onDelete, onClick }) => {
     setCurrentPage(1);
   }, [selectedProf]);
 
+  const handleProfessionSelect = (item) => {
+    setSelectedProf(item);
+  };
   const handlePageChange = (pageIndex) => {
     setCurrentPage(pageIndex);
   };
-  const handleProfessionSelect = (item) => {
-    setSelectedProf(item);
+  const handleSort = (item) => {
+    if (sortBy.iter === item) {
+      setSortBy((prevState) => ({
+        ...prevState,
+        order: prevState.order === "asc" ? "desc" : "asc"
+      }));
+    } else {
+      setSortBy({ iter: item, order: "asc" });
+    }
+    console.log({ item, sortBy });
   };
 
   const filteredUsers = selectedProf
     ? usersArr.filter((user) => user.profession._id === selectedProf._id)
     : usersArr;
-
   const count = filteredUsers.length;
-  const userCrop = paginate(filteredUsers, currentPage, pageSize);
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+  const userCrop = paginate(sortedUsers, currentPage, pageSize);
   const clearFilter = () => {
     setSelectedProf();
   };
@@ -55,29 +68,7 @@ const Users = ({ usersArr, onDelete, onClick }) => {
       <div className="d-flex flex-column">
         <SearchStatus length={count} />
         {count > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился, раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col">Избранное</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {userCrop.map((user) => (
-                <User
-                  key={user._id}
-                  onDelete={onDelete}
-                  user={user}
-                  onStatusChange={onClick}
-                />
-              ))}
-            </tbody>
-          </table>
+          <UsersTable users={userCrop} onSort={handleSort} {...rest} />
         )}
         <div className="d-flex justify-content-center">
           <Pagination
@@ -95,6 +86,6 @@ const Users = ({ usersArr, onDelete, onClick }) => {
 Users.propTypes = {
   usersArr: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   onDelete: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onToggleBookMark: PropTypes.func.isRequired
 };
 export default Users;

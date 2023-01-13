@@ -15,7 +15,7 @@ const App = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    setUsers((prevState) => prevState.filter((user) => user !== userId));
+    setUsers((prevState) => prevState.filter((user) => user._id !== userId));
   };
 
   const handleToggleBookMark = (id) => {
@@ -39,7 +39,7 @@ const App = () => {
         <Users
           onDelete={handleDelete}
           usersArr={users}
-          onClick={handleToggleBookMark}
+          onToggleBookMark={handleToggleBookMark}
         />
       )}
     </div>

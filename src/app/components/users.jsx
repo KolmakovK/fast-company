@@ -12,7 +12,7 @@ const Users = ({ usersArr, ...rest }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [professions, setProfessions] = useState([]);
   const [selectedProf, setSelectedProf] = useState();
-  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+  const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
   const pageSize = 12;
 
   useEffect(() => {
@@ -30,22 +30,14 @@ const Users = ({ usersArr, ...rest }) => {
     setCurrentPage(pageIndex);
   };
   const handleSort = (item) => {
-    if (sortBy.iter === item) {
-      setSortBy((prevState) => ({
-        ...prevState,
-        order: prevState.order === "asc" ? "desc" : "asc"
-      }));
-    } else {
-      setSortBy({ iter: item, order: "asc" });
-    }
-    console.log({ item, sortBy });
+    setSortBy(item);
   };
 
   const filteredUsers = selectedProf
     ? usersArr.filter((user) => user.profession._id === selectedProf._id)
     : usersArr;
   const count = filteredUsers.length;
-  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
   const userCrop = paginate(sortedUsers, currentPage, pageSize);
   const clearFilter = () => {
     setSelectedProf();
@@ -68,7 +60,12 @@ const Users = ({ usersArr, ...rest }) => {
       <div className="d-flex flex-column">
         <SearchStatus length={count} />
         {count > 0 && (
-          <UsersTable users={userCrop} onSort={handleSort} {...rest} />
+          <UsersTable
+            users={userCrop}
+            onSort={handleSort}
+            selectedSort={sortBy}
+            {...rest}
+          />
         )}
         <div className="d-flex justify-content-center">
           <Pagination

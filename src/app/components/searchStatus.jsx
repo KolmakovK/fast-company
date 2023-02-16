@@ -1,24 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const SearchStatus = ({ length }) => {
   function declOfNum(number, textForms) {
-    number = Math.abs(number) % 100;
-    const n1 = number % 10;
+    number = Math.abs(number) % 100
+    const n1 = number % 10
     if (number > 10 && number < 20) {
-      return textForms[2];
+      return textForms[2]
     }
     if (n1 > 1 && n1 < 5) {
-      return textForms[1];
+      return textForms[1]
     }
     if (n1 === 1) {
-      return textForms[0];
+      return textForms[0]
     }
-    return textForms[2];
+    return textForms[2]
   }
 
-  const variantsWord1 = ["человек", "человека", "человек"];
-  const variantsWord2 = ["тусанёт", "тусанёт", "тусанут"];
+  const variantsWord1 = ['человек', 'человека', 'человек']
+  const variantsWord2 = ['тусанёт', 'тусанёт', 'тусанут']
 
   const phrase =
     length !== 0
@@ -26,19 +26,19 @@ const SearchStatus = ({ length }) => {
           length,
           variantsWord2
         )} с тобой сегодня`
-      : "Никто с тобой не тусанёт";
+      : 'Никто с тобой не тусанёт'
 
-  const colorPhrase = length !== 0 ? "badge bg-primary" : "badge bg-danger";
+  const colorPhrase = length !== 0 ? 'badge bg-primary' : 'badge bg-danger'
 
   return (
     <h2>
       <span className={colorPhrase}>{phrase}</span>
     </h2>
-  );
-};
+  )
+}
 
 SearchStatus.propTypes = {
   length: PropTypes.number
-};
+}
 
-export default SearchStatus;
+export default SearchStatus

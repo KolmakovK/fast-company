@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Users from "./layouts/users";
-import NavBar from "./components/navBar";
-import Main from "./layouts/main";
-import Login from "./layouts/login";
-import UserPage from "./components/userPage";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Users from './layouts/users'
+import NavBar from './components/navBar'
+import Main from './layouts/main'
+import Login from './layouts/login'
+import UserPage from './components/userPage'
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/users" component={Users} />
       </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

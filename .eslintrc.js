@@ -3,20 +3,23 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  extends: ["plugin:react/recommended", "standard"],
+  extends: ['plugin:react/recommended', 'standard'],
   overrides: [],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module"
+    ecmaVersion: 'latest',
+    sourceType: 'module'
   },
-  plugins: ["react"],
+  plugins: ['react'],
   rules: {
-    indent: ["off"],
-    semi: [2, "always"],
-    "space-before-function-paren": [
-      "error",
-      { anonymous: "always", named: "never" }
+    indent: ['off'],
+    semi: ['error', 'never'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'always',
+        named: 'never'
+      }
     ],
-    quotes: ["error", "double", { allowTemplateLiterals: true }]
+    quotes: ['error', 'single', { allowTemplateLiterals: true }]
   }
 };

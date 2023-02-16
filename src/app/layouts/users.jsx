@@ -1,8 +1,8 @@
-import React from "react";
-import UsersList from "../components/usersList";
+import React from 'react'
+import UsersList from '../components/usersList'
 
 const Users = () => {
-  return <UsersList />;
-};
+  return <UsersList />
+}
 
-export default Users;
+export default Users

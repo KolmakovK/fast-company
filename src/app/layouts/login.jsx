@@ -39,8 +39,11 @@ const Login = () => {
   const validate = () => {
     const errors = validator(data, validatorConfig)
     setErrors(errors)
-    return Object.keys(errors).length === 0 || false
+    return Object.keys(errors).length === 0
   }
+
+  const isValid = Object.keys(errors).length === 0
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const isValid = validate()
@@ -48,25 +51,38 @@ const Login = () => {
     console.log(data)
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        onChange={handleChange}
-        name={'email'}
-        label={'Электронная почта'}
-        type={'text'}
-        value={data.email}
-        error={errors.email}
-      />
-      <TextField
-        onChange={handleChange}
-        name={'password'}
-        label={'Пароль'}
-        type={'password'}
-        value={data.password}
-        error={errors.password}
-      />
-      <button type={'submit'}>Войти</button>
-    </form>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-md-6 offset-md-3 shadow p-4">
+          <h3 className="mb-4">Авторизация</h3>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              onChange={handleChange}
+              name={'email'}
+              label={'Электронная почта'}
+              type={'text'}
+              value={data.email}
+              error={errors.email}
+            />
+            <TextField
+              onChange={handleChange}
+              name={'password'}
+              label={'Пароль'}
+              type={'password'}
+              value={data.password}
+              error={errors.password}
+            />
+            <button
+              type={'submit'}
+              disabled={!isValid}
+              className="btn btn-primary w-100 mx-auto"
+            >
+              Войти
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   )
 }
 

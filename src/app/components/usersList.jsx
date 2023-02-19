@@ -15,6 +15,7 @@ const UsersList = () => {
     path: 'name',
     order: 'asc'
   })
+  const [value, setValue] = useState('')
 
   const pageSize = 7
 
@@ -60,9 +61,12 @@ const UsersList = () => {
   }
 
   if (users) {
+    const targetValue = users.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    )
     const filteredUsers = selectedProf
       ? users.filter((user) => user.profession._id === selectedProf._id)
-      : users
+      : targetValue
     const count = filteredUsers.length
     const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
     const userCrop = paginate(sortedUsers, currentPage, pageSize)
@@ -86,6 +90,17 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
+          <form action="">
+            <input
+              type="text"
+              id="user-search"
+              placeholder="Search..."
+              onChange={(event) => {
+                setValue(event.target.value)
+                clearFilter()
+              }}
+            />
+          </form>
           {count > 0 && (
             <UsersTable
               users={userCrop}

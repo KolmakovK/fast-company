@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { paginate } from '../utils/paginate'
 import Pagination from './pagination'
 import GroupList from './groupList'
@@ -74,6 +74,7 @@ const UsersList = () => {
       setSelectedProf()
     }
 
+    console.log({ value })
     return (
       <div className="d-flex">
         {professions && (
@@ -81,7 +82,10 @@ const UsersList = () => {
             <GroupList
               selectedItem={selectedProf}
               items={professions}
-              onItemSelect={handleProfessionSelect}
+              onItemSelect={(item) => {
+                handleProfessionSelect(item)
+                setValue('')
+              }}
             />
             <button className="btn btn-secondary mt-2" onClick={clearFilter}>
               Очистить
@@ -92,6 +96,7 @@ const UsersList = () => {
           <SearchStatus length={count} />
           <form action="">
             <input
+              className="form-control"
               type="text"
               id="user-search"
               placeholder="Search..."
@@ -99,6 +104,7 @@ const UsersList = () => {
                 setValue(event.target.value)
                 clearFilter()
               }}
+              value={value}
             />
           </form>
           {count > 0 && (

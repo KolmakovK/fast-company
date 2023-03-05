@@ -1,8 +1,8 @@
 import React from 'react'
-import UsersList from '../components/usersList'
+import UsersListPage from '../components/page/usersListPage'
 
 const Users = () => {
-  return <UsersList />
+  return <UsersListPage />
 }
 
 export default Users

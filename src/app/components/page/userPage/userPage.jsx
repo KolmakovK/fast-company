@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Api from '../api'
+import Api from '../../../api'
 import { useHistory, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import QualitiesList from './qualitiesList'
+import QualitiesList from '../../ui/qualities/qualitiesList'
 
 const UserPage = () => {
   const { userId } = useParams()

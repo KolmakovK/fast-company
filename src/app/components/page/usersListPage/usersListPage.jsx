@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { paginate } from '../utils/paginate'
-import Pagination from './pagination'
-import GroupList from './groupList'
-import Api from '../api'
-import SearchStatus from './searchStatus'
-import UsersTable from './usersTable'
+import { paginate } from '../../../utils/paginate'
+import Pagination from '../../common/pagination'
+import GroupList from '../../common/groupList'
+import Api from '../../../api'
+import SearchStatus from '../../ui/searchStatus'
+import UsersTable from '../../ui/usersTable'
 import _ from 'lodash'
 
-const UsersList = () => {
+const UsersListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [professions, setProfessions] = useState()
   const [selectedProf, setSelectedProf] = useState()
@@ -94,7 +94,7 @@ const UsersList = () => {
         )}
         <div className="d-flex flex-column">
           <SearchStatus length={count} />
-          <form action="">
+          <form action="src/app/components">
             <input
               className="form-control"
               type="text"
@@ -137,4 +137,4 @@ const UsersList = () => {
   )
 }
 
-export default UsersList
+export default UsersListPage

@@ -20,6 +20,7 @@ module.exports = {
         named: 'never'
       }
     ],
+    'multiline-ternary': ['off'],
     quotes: ['error', 'single', { allowTemplateLiterals: true }]
   }
-};
+}

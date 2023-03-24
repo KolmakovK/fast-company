@@ -1,8 +1,6 @@
 export function validator(data, config) {
   const errors = {}
 
-  // todo: refactoring https://lk.result.school/pl/teach/control/lesson/view?id=258409273
-
   function validate(validateMethod, data, config) {
     let statusValidate
     switch (validateMethod) {

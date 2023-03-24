@@ -19,7 +19,7 @@ const UsersListPage = () => {
 
   const pageSize = 7
 
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     Api.users.fetchAll().then((data) => setUsers(data))
@@ -59,7 +59,7 @@ const UsersListPage = () => {
   const handleSort = (item) => {
     setSortBy(item)
   }
-
+  console.log(Api.users.fetchAll().then((data) => setUsers(data)))
   if (users) {
     const targetValue = users.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
@@ -74,7 +74,6 @@ const UsersListPage = () => {
       setSelectedProf()
     }
 
-    console.log({ value })
     return (
       <div className="d-flex">
         {professions && (

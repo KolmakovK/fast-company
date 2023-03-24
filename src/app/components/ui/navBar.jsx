@@ -2,11 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NavBar = () => {
-  // todo: added 'active' in className with condition
   return (
     <ul className="nav nav-tabs">
       <li className="nav-item">
-        <Link to="/" className="nav-link " role="button">
+        <Link to="/" className="nav-link" role="button">
           Main
         </Link>
       </li>

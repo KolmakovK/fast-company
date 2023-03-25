@@ -8,7 +8,6 @@ import MultiSelectField from '../../common/form/multiSelectField'
 import { useHistory, useParams } from 'react-router-dom'
 
 const EditUserPage = () => {
-  // до этого компонента не успел дойти т.к. поменял api и все, стоп машина
   const [data, setData] = useState({
     name: '',
     email: '',

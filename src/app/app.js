@@ -15,8 +15,8 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/login/:type?" component={Login} />
-        <Route path="/users/:userId?/edit" component={EditUserPage} />
-        <Route path="/users/:userId?" component={UserPage} />
+        <Route path="/users/:userId/edit" component={EditUserPage} />
+        <Route path="/users/:userId" component={UserPage} />
         <Route path="/users" component={Users} />
         <Redirect to="/" />
       </Switch>

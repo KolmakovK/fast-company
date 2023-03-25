@@ -59,7 +59,7 @@ const UsersListPage = () => {
   const handleSort = (item) => {
     setSortBy(item)
   }
-  console.log(Api.users.fetchAll().then((data) => setUsers(data)))
+
   if (users) {
     const targetValue = users.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())

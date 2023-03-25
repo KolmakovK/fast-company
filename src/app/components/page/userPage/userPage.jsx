@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Api from '../../../api'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Qualities from '../../ui/qualities'
 
-const UserPage = ({ userId }) => {
+const UserPage = () => {
+  const { userId } = useParams()
   const history = useHistory()
   const [user, setUser] = useState()
   useEffect(() => {
     Api.users.getById(userId).then((data) => setUser(data))
   }, [])
   const handleBackToUsersList = () => {
-    history.push('/users/:userId?/edit')
+    history.push(`/users/:${userId}/edit`)
   }
 
   if (user) {
@@ -30,7 +31,7 @@ const UserPage = ({ userId }) => {
       </div>
     )
   } else {
-    return <h2>Loading...</h2>
+    return <h2>Loading... </h2>
   }
 }
 

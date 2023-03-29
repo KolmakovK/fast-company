@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Api from '../../../api'
 import { useHistory, useParams } from 'react-router-dom'
-import PropTypes from 'prop-types'
+
 import Qualities from '../../ui/qualities'
 
 const UserPage = () => {
@@ -11,8 +11,9 @@ const UserPage = () => {
   useEffect(() => {
     Api.users.getById(userId).then((data) => setUser(data))
   }, [])
+  console.log('userPage', { userId })
   const handleBackToUsersList = () => {
-    history.push(`/users/:${userId}/edit`)
+    history.push(`/users/${userId}/edit`)
   }
 
   if (user) {
@@ -34,7 +35,5 @@ const UserPage = () => {
     return <h2>Loading... </h2>
   }
 }
-
-UserPage.propTypes = { userId: PropTypes.string.isRequired }
 
 export default UserPage

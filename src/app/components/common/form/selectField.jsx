@@ -23,7 +23,7 @@ const SelectField = ({
     !Array.isArray(options) && typeof options === 'object'
       ? Object.values(options)
       : options
-
+  console.log({ value })
   return (
     <div className="mb-4">
       <label htmlFor={name} className="form-label">

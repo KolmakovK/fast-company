@@ -110,7 +110,7 @@ const EditUserPage = () => {
   }
 
   if (user) {
-    console.log('editUser', { user }, { userId }, { data })
+    console.log('editUser', { user }, { professions })
 
     return (
       <div className="container mt-5">
@@ -134,11 +134,11 @@ const EditUserPage = () => {
               />
               <SelectField
                 label="Выбери свою профессию"
-                defaultOption="Choose..."
+                defaultOption={user.profession.name}
                 options={professions}
                 name="profession"
                 onChange={handleChange}
-                value={user.profession}
+                value={data.profession}
               />
               <RadioField
                 options={[
@@ -155,7 +155,7 @@ const EditUserPage = () => {
                     value: 'other'
                   }
                 ]}
-                value={user.sex}
+                value={data.sex}
                 name="sex"
                 onChange={handleChange}
                 label="Выберите ваш пол"

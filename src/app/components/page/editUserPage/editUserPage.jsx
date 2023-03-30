@@ -24,9 +24,23 @@ const EditUserPage = () => {
   })
 
   useEffect(() => {
-    Api.users.getById(userId).then((data) => setUser(data))
+    Api.users.getById(userId).then((data) => {
+      setUser(data)
+      setData(
+        data,
+        (data.profession = {
+          label: data.profession.name,
+          value: data.profession._id
+        }),
+        (data.qualities = {
+          value: data._id,
+          label: data.name,
+          color: data.color
+        })
+      )
+    })
   }, [])
-
+  console.log({ data })
   useEffect(() => {
     Api.professions.fetchAll().then((data) => {
       const professionsList = Object.keys(data).map((professionName) => ({
@@ -110,8 +124,7 @@ const EditUserPage = () => {
   }
 
   if (user) {
-    console.log('editUser', { user }, { professions })
-
+    console.log(data.profession)
     return (
       <div className="container mt-5">
         <div className="row">
@@ -122,19 +135,19 @@ const EditUserPage = () => {
                 name={'name'}
                 label={'Имя'}
                 type={'text'}
-                value={user.name}
+                value={data.name}
               />
               <TextField
                 onChange={handleChange}
                 name={'email'}
                 label={'Электронная почта'}
                 type={'text'}
-                value={user.email}
+                value={data.email}
                 error={errors.email}
               />
               <SelectField
                 label="Выбери свою профессию"
-                defaultOption={user.profession.name}
+                defaultOption="Choose..."
                 options={professions}
                 name="profession"
                 onChange={handleChange}
@@ -163,7 +176,7 @@ const EditUserPage = () => {
               <MultiSelectField
                 options={qualities}
                 onChange={handleChange}
-                defaultValue={user.qualities}
+                defaultValue={data.qualities}
                 name="qualities"
                 label="Выберите ваши качества"
               />

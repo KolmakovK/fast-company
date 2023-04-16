@@ -15,11 +15,11 @@ const UsersListPage = () => {
     path: 'name',
     order: 'asc'
   })
-  const [value, setValue] = useState('')
+  const [searchQuery, setsearchQuery] = useState('')
 
   const pageSize = 7
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState()
 
   useEffect(() => {
     Api.users.fetchAll().then((data) => setUsers(data))
@@ -59,10 +59,10 @@ const UsersListPage = () => {
   const handleSort = (item) => {
     setSortBy(item)
   }
-
+console.log(users)
   if (users) {
     const targetValue = users.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase())
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
     const filteredUsers = selectedProf
       ? users.filter((user) => user.profession._id === selectedProf._id)
@@ -83,7 +83,7 @@ const UsersListPage = () => {
               items={professions}
               onItemSelect={(item) => {
                 handleProfessionSelect(item)
-                setValue('')
+                setsearchQuery('')
               }}
             />
             <button className="btn btn-secondary mt-2" onClick={clearFilter}>
@@ -98,12 +98,13 @@ const UsersListPage = () => {
               className="form-control"
               type="text"
               id="user-search"
+              name='searchQuery'
               placeholder="Search..."
               onChange={(event) => {
-                setValue(event.target.value)
+                setsearchQuery(event.target.value)
                 clearFilter()
               }}
-              value={value}
+              value={searchQuery}
             />
           </form>
           {count > 0 && (
@@ -129,7 +130,7 @@ const UsersListPage = () => {
   }
   // TODO: loading dont working
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center m-5">
       <div className="spinner-grow text-primary" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>

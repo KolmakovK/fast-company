@@ -59,7 +59,8 @@ const UsersListPage = () => {
   const handleSort = (item) => {
     setSortBy(item)
   }
-console.log(users)
+  console.log(users)
+  console.log(professions)
   if (users) {
     const targetValue = users.filter((item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -98,7 +99,7 @@ console.log(users)
               className="form-control"
               type="text"
               id="user-search"
-              name='searchQuery'
+              name="searchQuery"
               placeholder="Search..."
               onChange={(event) => {
                 setsearchQuery(event.target.value)
@@ -128,7 +129,6 @@ console.log(users)
       </div>
     )
   }
-  // TODO: loading dont working
   return (
     <div className="d-flex justify-content-center m-5">
       <div className="spinner-grow text-primary" role="status">

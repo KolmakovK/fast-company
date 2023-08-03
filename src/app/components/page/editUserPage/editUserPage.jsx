@@ -6,6 +6,8 @@ import SelectField from '../../common/form/selectField'
 import RadioField from '../../common/form/radioField'
 import MultiSelectField from '../../common/form/multiSelectField'
 import { useHistory, useParams } from 'react-router-dom'
+import Loading from '../../common/loading'
+import PrevPageButton from '../../common/table/prevPageButton'
 
 const EditUserPage = () => {
   const { userId } = useParams()
@@ -126,6 +128,7 @@ const EditUserPage = () => {
   const isValid = Object.keys(errors).length === 0
   return (
     <div className="container mt-5">
+      <PrevPageButton />
       <div className="row">
         <div className="col-md-6 offset-md-3 shadow p-4">
           {!isLoading && Object.keys(professions).length > 0 ? (
@@ -180,11 +183,7 @@ const EditUserPage = () => {
               </button>
             </form>
           ) : (
-            <div className="d-flex justify-content-center m-5">
-              <div className="spinner-grow text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
+            <Loading />
           )}
         </div>
       </div>

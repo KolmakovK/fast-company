@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { paginate } from '../../../utils/paginate'
+import Api from '../../../api'
+import _ from 'lodash'
+
 import Pagination from '../../common/pagination'
 import GroupList from '../../common/groupList'
-import Api from '../../../api'
 import SearchStatus from '../../ui/searchStatus'
 import UsersTable from '../../ui/usersTable'
-import _ from 'lodash'
+import { paginate } from '../../../utils/paginate'
+import Loading from '../../common/loading'
 
 const UsersListPage = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -59,7 +61,8 @@ const UsersListPage = () => {
   const handleSort = (item) => {
     setSortBy(item)
   }
-console.log(users)
+  console.log(users)
+  console.log(professions)
   if (users) {
     const targetValue = users.filter((item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -98,7 +101,7 @@ console.log(users)
               className="form-control"
               type="text"
               id="user-search"
-              name='searchQuery'
+              name="searchQuery"
               placeholder="Search..."
               onChange={(event) => {
                 setsearchQuery(event.target.value)
@@ -128,14 +131,7 @@ console.log(users)
       </div>
     )
   }
-  // TODO: loading dont working
-  return (
-    <div className="d-flex justify-content-center m-5">
-      <div className="spinner-grow text-primary" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  )
+  return <Loading />
 }
 
 export default UsersListPage
